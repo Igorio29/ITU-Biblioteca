@@ -1,0 +1,14 @@
+@host = http://localhost:3000
+@baseUrl = {{host}}/api/v1
+@contentType = application/json
+
+Post {{baseUrl}}/books
+Content-Type: {{contentType}}
+
+{
+    "titulo": "Harry Potter",
+    "subtitulo": "Prisioneiro de Azkaban",
+    "autor": "JK ROWLING",
+    "genero": "Fantasia",
+    "capa": "https://http2.mlstatic.com/D_NQ_NP_849097-CBT75943953063_042024-O.webp"
+}
