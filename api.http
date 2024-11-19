@@ -12,3 +12,11 @@ Content-Type: {{contentType}}
     "genero": "Fantasia",
     "capa": "https://http2.mlstatic.com/D_NQ_NP_849097-CBT75943953063_042024-O.webp"
 }
+
+###
+GET {{baseUrl}}/books
+Content-Type: {{contentType}} 
+
+###
+GET {{baseUrl}}/books/673be0aebe3a3e867d3e2b36
+Content-Type: {{contentType}}
