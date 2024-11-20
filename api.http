@@ -22,12 +22,15 @@ GET {{baseUrl}}/books/673d284ce13dcc78572a3352
 Content-Type: {{contentType}}
 
 ###
-PUT {{baseUrl}}/books/673d284ce13dcc78572a3352
+PUT {{baseUrl}}/books/673d2ae22d96ec30526c36cb
 Content-Type: {{contentType}}  
 
 {
-    "subtitulo":"Ordem da Fenix",
-    "capa": "https://m.media-amazon.com/images/I/81ibfYk4qmL._AC_UF1000,1000_QL80_.jpg"
+    "titulo": "Harry Potter",
+    "subtitulo":"Reliqueas da morte",
+    "autor":"JK Rowling",
+    "genero":"Fantasia",
+    "capa": "https://m.media-amazon.com/images/I/81rvO7xcJOL._AC_UF1000,1000_QL80_.jpg"
 }
 
 
