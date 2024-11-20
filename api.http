@@ -7,7 +7,7 @@ Content-Type: {{contentType}}
 
 {
     "titulo": "Harry Potter",
-    "subtitulo": "Prisioneiro de Azkaban",
+    "subtitulo": "Calice de Fogo",
     "autor": "JK ROWLING",
     "genero": "Fantasia",
     "capa": "https://http2.mlstatic.com/D_NQ_NP_849097-CBT75943953063_042024-O.webp"
@@ -18,5 +18,19 @@ GET {{baseUrl}}/books
 Content-Type: {{contentType}} 
 
 ###
-GET {{baseUrl}}/books/673be0aebe3a3e867d3e2b36
+GET {{baseUrl}}/books/673d284ce13dcc78572a3352
+Content-Type: {{contentType}}
+
+###
+PUT {{baseUrl}}/books/673d284ce13dcc78572a3352
+Content-Type: {{contentType}}  
+
+{
+    "subtitulo":"Ordem da Fenix",
+    "capa": "https://m.media-amazon.com/images/I/81ibfYk4qmL._AC_UF1000,1000_QL80_.jpg"
+}
+
+
+###
+DELETE {{baseUrl}}/books/673d284ce13dcc78572a3352
 Content-Type: {{contentType}}
