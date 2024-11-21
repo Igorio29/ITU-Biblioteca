@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const bookSchema = z.object({
     titulo: z.string().min(3).max(100),
-    subtitulo: z.string().min(3).max(200).optional(),
+    subtitulo: z.string().optional(),
     autor: z.string().min(3).max(100).optional(),
     genero: z.string().min(3).max(50),
     capa: z.string().url(),

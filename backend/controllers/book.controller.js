@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Book } from "../models/book.model.js";
 
 export const getBooks = async (req, res) =>  {
-    try {
+    try {       
         const books = await Book.find();
         res.status(200).json({success: true, data: books})
     } catch (error) {
