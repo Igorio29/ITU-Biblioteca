@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid2"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PropTypes from 'prop-types'
-import EditBookDialog from './editBookDialog'
+import EditBookDialog from './EditBookDialog'
 import ConfirmDeleteBookDialog from './ConfirmDeleteDialog';
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
