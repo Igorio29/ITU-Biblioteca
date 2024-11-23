@@ -12,7 +12,7 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
             titulo: book.titulo,
@@ -44,6 +44,7 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                         })}
                         error={!!errors.titulo}
                         helperText={errors?.titulo?.message}
+                        disabled={isSubmitting}
                     />
                     <TextField
                         id="outlined-basic"
@@ -55,7 +56,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                         })}
                         error={!!errors.subtitulo}
-                        helperText={errors?.subtitulo?.message} />
+                        helperText={errors?.subtitulo?.message} 
+                        disabled={isSubmitting}/>
                     <TextField
                         id="outlined-basic"
                         label="Autor"
@@ -67,7 +69,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                         })}
                         error={!!errors.autor}
-                        helperText={errors?.autor?.message} />
+                        helperText={errors?.autor?.message} 
+                        disabled={isSubmitting}/>
                     <TextField
                         id="outlined-basic"
                         label="Genero"
@@ -79,7 +82,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                         })}
                         error={!!errors.genero}
-                        helperText={errors?.genero?.message} />
+                        helperText={errors?.genero?.message}
+                        disabled={isSubmitting} />
                     <TextField
                         id="outlined-basic"
                         label="Imagem da capa"
@@ -95,10 +99,15 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             },
                         })}
                         error={!!errors.capa}
-                        helperText={errors?.capa?.message} />
+                        helperText={errors?.capa?.message}
+                        disabled={isSubmitting} />
                     <DialogActions>
-                        <Button onClick={onClose}>Cancelar</Button>
-                        <Button variant="contained" color="primary" type="submit">Atualizar Livro</Button>
+                        <Button onClick={onClose} disabled={isSubmitting}>Cancelar</Button>
+                        <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
+
+                        {isSubmitting ? 'Salvando...' : 'Salvar'}
+                        
+                        </Button>
                     </DialogActions>
 
                 </DialogContent>

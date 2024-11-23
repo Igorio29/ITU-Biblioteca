@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PropTypes from 'prop-types';
 import { DialogContentText } from '@mui/material';
 
-const ConfirmDeleteBookDialog = ({ open, onClose, onDelete }) => {
+const ConfirmDeleteBookDialog = ({ open, onClose, onDelete, isDeleting }) => {
 
     return (
         <Dialog
@@ -23,8 +23,12 @@ const ConfirmDeleteBookDialog = ({ open, onClose, onDelete }) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose}>Cancelar</Button>
-                <Button onClick={onDelete} variant="contained" color="error" >Deletar</Button>
+                <Button onClick={onClose} disabled={isDeleting}>Cancelar</Button>
+                <Button onClick={onDelete} variant="contained" color="error" disabled={isDeleting}>
+
+                    {isDeleting ? "Excluindo..." : "Excluir"}
+
+                </Button>
             </DialogActions>
         </Dialog >
     );
@@ -33,7 +37,8 @@ const ConfirmDeleteBookDialog = ({ open, onClose, onDelete }) => {
 ConfirmDeleteBookDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    isDeleting: PropTypes.bool
 }
 
 export default ConfirmDeleteBookDialog

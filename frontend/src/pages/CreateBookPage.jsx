@@ -8,22 +8,28 @@ import { useSnackbarContext } from '../hooks/useSnackbarContext';
 
 const CreateBookPage = () => {
     const navigate = useNavigate()
-    const {mutate, isPending} = bookCreateMutation();
+    const {mutateAsync} = bookCreateMutation();
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         reset,
     } = useForm();
 
     const {showSnackbar} = useSnackbarContext()
 
     const onSubmit = async (data) => {
-        mutate(data);
+        try {
+            await mutateAsync(data);
+            showSnackbar("Livro cadastrado com sucesso", "success")
+        } catch (error) {
+            console.error("Ocorreu um erro ao cadastrar o livro", error);
+            showSnackbar("Ocorreu um erro ao cadastrar o livro", "error")
+        }
         reset();
         navigate("/");
-        showSnackbar("Livro cadastrado com sucesso", "success")
+        
     }
 
     return (
@@ -44,6 +50,7 @@ const CreateBookPage = () => {
                             })}
                             error={!!errors.titulo}
                             helperText={errors?.titulo?.message}
+                            disabled={isSubmitting}
                         />
                         <TextField
                             id="outlined-basic"
@@ -55,7 +62,9 @@ const CreateBookPage = () => {
                                 minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                             })}
                             error={!!errors.subtitulo}
-                            helperText={errors?.subtitulo?.message} />
+                            helperText={errors?.subtitulo?.message}
+                            disabled={isSubmitting} />
+                            
                     </Box>
                     <Box sx={{ display: "flex", gap: 2 }}>
                         <TextField
@@ -69,7 +78,9 @@ const CreateBookPage = () => {
                                 minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                             })}
                             error={!!errors.autor}
-                            helperText={errors?.autor?.message} />
+                            helperText={errors?.autor?.message}
+                            disabled={isSubmitting} />
+                            
                         <TextField
                             id="outlined-basic"
                             label="Genero"
@@ -81,7 +92,9 @@ const CreateBookPage = () => {
                                 minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                             })}
                             error={!!errors.genero}
-                            helperText={errors?.genero?.message} />
+                            helperText={errors?.genero?.message}
+                            disabled={isSubmitting} />
+                            
                     </Box>
                     <Box sx={{ display: "flex", gap: 2 }}>
                         <TextField
@@ -99,11 +112,17 @@ const CreateBookPage = () => {
                                 },
                             })}
                             error={!!errors.capa}
-                            helperText={errors?.capa?.message} />
+                            helperText={errors?.capa?.message}
+                            disabled={isSubmitting}/>
+                            
                     </Box>
                 </CardContent>
                 <CardActions>
-                    <Button variant="contained" color="primary" type="submit" disabled={isPending}>Cadastrar novo livro</Button>
+                    <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
+                        
+                    {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+
+                    </Button>
                 </CardActions>
             </form>
         </Card>
