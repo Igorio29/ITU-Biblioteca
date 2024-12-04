@@ -11,12 +11,14 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PropTypes from 'prop-types'
 import EditBookDialog from './EditBookDialog'
 import ConfirmDeleteBookDialog from './ConfirmDeleteDialog';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import { bookDeleteMutation, bookEditMutation } from '../lib/mutations';
 import { useSnackbarContext } from '../hooks/useSnackbarContext';
+import { Link } from 'react-router-dom';
 
-const BookCard = ({ _id: id, titulo, subtitulo, autor, genero, capa }) => {
+const BookCard = ({ _id: id, titulo, subtitulo, autor, genero, capa, link }) => {
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -104,6 +106,11 @@ const BookCard = ({ _id: id, titulo, subtitulo, autor, genero, capa }) => {
                     display: "flex",
                     justifyContent: "end"
                 }}>
+                    {link && (
+                        <IconButton component={Link} to={link} target="_blank" rel="noopener noreferrer">
+                            <ImportContactsIcon />
+                        </IconButton>
+                    )}
                     <IconButton onClick={handleEditDialogOpen}>
                         <EditIcon></EditIcon>
                     </IconButton>
@@ -113,7 +120,7 @@ const BookCard = ({ _id: id, titulo, subtitulo, autor, genero, capa }) => {
                 </Box>
             </Paper>
             <EditBookDialog
-                book={{ id, titulo, subtitulo, autor, genero, capa }}
+                book={{ id, titulo, subtitulo, autor, genero, capa, link }}
                 open={editDialogOpen}
                 onClose={handleEditDialogClose}
                 onSave={handleEditSaveBook}
@@ -135,7 +142,8 @@ BookCard.propTypes = {
     subtitulo: PropTypes.string.isRequired,
     autor: PropTypes.string.isRequired,
     genero: PropTypes.string.isRequired,
-    capa: PropTypes.string.isRequired
+    capa: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired
 }
 
 export default BookCard

@@ -20,6 +20,10 @@ const bookSchema = new mongoose.Schema({
     capa: {
         type: String,
         require:  true
+    },
+    link: {
+        type: String,
+        require:  true
     }
 }, {timestamps: true}) // o mesmo model sera usado para criar e atualizar o banco
 

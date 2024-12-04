@@ -16,7 +16,7 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
     } = useForm({
         defaultValues: {
             titulo: book.titulo,
-            subtitulo: book.subtitulo|| "",
+            subtitulo: book.subtitulo || "",
             autor: book.autor,
             genero: book.genero,
             capa: book.capa
@@ -56,8 +56,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                         })}
                         error={!!errors.subtitulo}
-                        helperText={errors?.subtitulo?.message} 
-                        disabled={isSubmitting}/>
+                        helperText={errors?.subtitulo?.message}
+                        disabled={isSubmitting} />
                     <TextField
                         id="outlined-basic"
                         label="Autor"
@@ -69,8 +69,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                             minLength: { value: 3, message: 'Mínimo 3 caracteres' },
                         })}
                         error={!!errors.autor}
-                        helperText={errors?.autor?.message} 
-                        disabled={isSubmitting}/>
+                        helperText={errors?.autor?.message}
+                        disabled={isSubmitting} />
                     <TextField
                         id="outlined-basic"
                         label="Genero"
@@ -101,12 +101,29 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                         error={!!errors.capa}
                         helperText={errors?.capa?.message}
                         disabled={isSubmitting} />
+                    <TextField
+                        id="outlined-basic"
+                        label="Link do PDF"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        {...register("link", {
+                            required: 'O link do pdf de leitura é obrigatorio',
+                            pattern: {
+                                value: /^(https?:\/\/.*)$/i,
+                                message: 'URL de PDF inválida',
+                            },
+                        })}
+                        error={!!errors.link}
+                        helperText={errors?.link?.message}
+                        disabled={isSubmitting}
+                    />
                     <DialogActions>
                         <Button onClick={onClose} disabled={isSubmitting}>Cancelar</Button>
                         <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
 
-                        {isSubmitting ? 'Salvando...' : 'Salvar'}
-                        
+                            {isSubmitting ? 'Salvando...' : 'Salvar'}
+
                         </Button>
                     </DialogActions>
 
@@ -123,7 +140,8 @@ EditBookDialog.propTypes = {
         subtitulo: PropTypes.string.isRequired,
         autor: PropTypes.string.isRequired,
         genero: PropTypes.string.isRequired,
-        capa: PropTypes.string.isRequired
+        capa: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired
     }),
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,

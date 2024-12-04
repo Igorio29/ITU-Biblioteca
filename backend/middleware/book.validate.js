@@ -6,6 +6,7 @@ export const bookSchema = z.object({
     autor: z.string().min(3).max(100).optional(),
     genero: z.string().min(3).max(50),
     capa: z.string().url(),
+    link: z.string().url()
 })
 
 export const validateBook = async (req, res, next) => {

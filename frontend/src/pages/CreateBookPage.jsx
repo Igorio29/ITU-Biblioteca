@@ -8,7 +8,7 @@ import { useSnackbarContext } from '../hooks/useSnackbarContext';
 
 const CreateBookPage = () => {
     const navigate = useNavigate()
-    const {mutateAsync} = bookCreateMutation();
+    const { mutateAsync } = bookCreateMutation();
 
     const {
         register,
@@ -17,7 +17,7 @@ const CreateBookPage = () => {
         reset,
     } = useForm();
 
-    const {showSnackbar} = useSnackbarContext()
+    const { showSnackbar } = useSnackbarContext()
 
     const onSubmit = async (data) => {
         try {
@@ -29,7 +29,7 @@ const CreateBookPage = () => {
         }
         reset();
         navigate("/");
-        
+
     }
 
     return (
@@ -64,7 +64,7 @@ const CreateBookPage = () => {
                             error={!!errors.subtitulo}
                             helperText={errors?.subtitulo?.message}
                             disabled={isSubmitting} />
-                            
+
                     </Box>
                     <Box sx={{ display: "flex", gap: 2 }}>
                         <TextField
@@ -80,7 +80,7 @@ const CreateBookPage = () => {
                             error={!!errors.autor}
                             helperText={errors?.autor?.message}
                             disabled={isSubmitting} />
-                            
+
                         <TextField
                             id="outlined-basic"
                             label="Genero"
@@ -94,7 +94,7 @@ const CreateBookPage = () => {
                             error={!!errors.genero}
                             helperText={errors?.genero?.message}
                             disabled={isSubmitting} />
-                            
+
                     </Box>
                     <Box sx={{ display: "flex", gap: 2 }}>
                         <TextField
@@ -113,14 +113,34 @@ const CreateBookPage = () => {
                             })}
                             error={!!errors.capa}
                             helperText={errors?.capa?.message}
-                            disabled={isSubmitting}/>
-                            
+                            disabled={isSubmitting} />
+
                     </Box>
+                    <Box sx={{ display: "flex", gap: 2 }}>
+                        <TextField
+                            id="outlined-basic"
+                            label="Link do PDF"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            {...register("link", {
+                                required: 'O link do pdf de leitura é obrigatorio',
+                                pattern: {
+                                    value: /^(https?:\/\/.*)$/i,
+                                    message: 'URL de PDF inválida',
+                                },
+                            })}
+                            error={!!errors.link}
+                            helperText={errors?.link?.message}
+                            disabled={isSubmitting}
+                        />
+                    </Box>
+
                 </CardContent>
                 <CardActions>
                     <Button variant="contained" color="primary" type="submit" disabled={isSubmitting}>
-                        
-                    {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+
+                        {isSubmitting ? "Cadastrando..." : "Cadastrar"}
 
                     </Button>
                 </CardActions>

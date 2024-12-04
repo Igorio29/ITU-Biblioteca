@@ -31,10 +31,10 @@ export const getBook = async(req, res) => {
 }
 
 export const createBook = async (req, res) => {
-    const { titulo, subtitulo, autor, genero, capa } = req.body;
+    const { titulo, subtitulo, autor, genero, capa, link } = req.body;
 
     try {
-        const book = new Book({ titulo, subtitulo, autor, genero, capa })
+        const book = new Book({ titulo, subtitulo, autor, genero, capa, link })
         await book.save()
         res.status(201).json({success: true, data: book})
     } catch (error) {
@@ -45,7 +45,7 @@ export const createBook = async (req, res) => {
 
 export const updateBook = async (req, res) => {
     const {id} = req.params
-    const {titulo, subtitulo, autor, genero, capa} = req.body
+    const {titulo, subtitulo, autor, genero, capa, link} = req.body
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({success: false, error: "Id invalido"})
@@ -58,7 +58,7 @@ export const updateBook = async (req, res) => {
 
         const updatedBook = await Book.findByIdAndUpdate(
             id,
-            {titulo, subtitulo, autor, genero, capa},
+            {titulo, subtitulo, autor, genero, capa, link},
             {new: true}
         )
 
