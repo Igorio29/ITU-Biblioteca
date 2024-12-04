@@ -19,7 +19,8 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
             subtitulo: book.subtitulo || "",
             autor: book.autor,
             genero: book.genero,
-            capa: book.capa
+            capa: book.capa,
+            link: book.link
         }
     });
     return (
@@ -91,7 +92,7 @@ const EditBookDialog = ({ book, open, onClose, onSave }) => {
                         fullWidth
                         margin="normal"
                         {...register("capa", {
-                            required: 'O capa é obrigatorio',
+                            required: 'A capa é obrigatoria',
                             pattern: {
                                 value:
                                     /^(https?:\/\/.*\.(?:png|jpg|jpeg|giff|webp|bmp|tiff))$/i,
